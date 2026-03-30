@@ -1,0 +1,20 @@
+In charge,Ablation ID,Description,Component,Values,Priority,Expected
+Anderson,BL,"Full ATC-EnhanceNet with SNR conditioning, FiLM, all losses, 5 DeConformer blocks, VHF augmentation.",None,Default,Critical,Best overall performance
+Anderson,DC,"Reproduce DeCGAN architecture (dual decoders, no SNR conditioning).",Architecture,DeCGAN,Critical,Baseline comparison (~paper performance)
+Anderson,A1,Remove both SNR estimator and FiLM.,SNR conditioning,Removed,Critical,"Performance drop, especially at low SNR"
+Anderson,A10,Replace learned SNR with fixed or oracle SNR; keep FiLM.,SNR estimation,Fixed / oracle,High,Tests importance of learning SNR
+Anderson,A11,Keep SNR embedding but remove FiLM modulation.,Conditioning mechanism,FiLM removed,High,Tests effectiveness of FiLM vs raw conditioning
+Anderson,A8,Replace FiLM with concatenation-based conditioning.,Conditioning method,Concat vs FiLM,Medium,FiLM should outperform concat
+Anderson,A3,Remove Wav2Vec2 perceptual loss.,Loss,λ_percep = 0,Critical,"Worse intelligibility (STOI, WER)"
+Jeanne,A4,Remove GAN training (generator only).,Loss,λ_gan = 0,Critical,Less natural audio
+Jeanne,A12,Remove multi-resolution STFT loss.,Loss,λ_mrstft = 0,High,Spectral artifacts increase
+Jeanne,A13,Train using magnitude loss only (no real/imag loss).,Loss,No complex loss,High,Poor phase reconstruction
+Jeanne,A2,Separate mask and complex decoders.,Decoder,Dual branch,Medium,Better phase but heavier model
+Johovanis,A5,"Test 3, 5, 7 blocks.",Depth,"3, 5, 7",Critical,Trade-off performance vs cost
+Johovanis,A9,Remove WaveNet-style temporal conv.,Temporal modeling,Removed,High,Loss of temporal context
+Johovanis,A14,Predict clean spectrogram instead of complex mask.,Output formulation,Direct vs mask,High,Masking should be more stable
+Johovanis,A6,Remove ATC channel simulation during training.,Data augmentation,prob_vhf = 0,Critical,Poor real-world generalization
+Christian,H1,Tune λ_percep.,Hyperparameter,"0.05, 0.1, 0.2, 0.5",Medium,Trade-off quality vs distortion
+Christian,H2,Tune λ_gan.,Hyperparameter,"0.01, 0.05, 0.1, 0.2",Medium,Balance realism vs stability
+Christian,H3,Tune G and D learning rates.,Optimization,"G: 1e-4,5e-4,1e-3 | D: 5e-4,1e-3,2e-3",Medium,Find stable convergence region
+Christian,A15,Compare parameter count vs performance.,Efficiency,Params vs PESQ/STOI,Medium,Efficiency-performance tradeoff

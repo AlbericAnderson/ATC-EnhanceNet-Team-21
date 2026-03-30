@@ -1,0 +1,21 @@
+
+batch_size: 16 
+epochs: 100
+
+# Optimizer lr for Generator and Discriminator
+optimizer_G_lr: 0.0005
+optimizer_D_lr: 0.001
+
+# gradient clipping
+gradient_clipping: 10.0
+
+# Losses hyperparameters
+mag_ri_weight: 0.7 # weight to combine magnitude loss LMag and the phase-aware loss LRI, 0.7 in the baseline paper DecGAN
+lambda_Ltf: 1 # combined loss Ltf weight, 1 in the baseline paper DecGAN
+lambda_Lgan: 0.05 # adversarial loss Lgan weight, 0.05 in the baseline paper DecGAN
+lambda_Lmrstft: 0.2 # Multi-Resolution STFT Loss weight, replace the time-domain loss in the baseline paper DecGAN which has 0.2 weight in the total loss
+lambda_Lpercep: 0.1 # new added perceptual loss Lpercep weight, 0.1 default
+
+# Others
+wandb: True
+Name: "Anderson Awolossou" # Write your name here
